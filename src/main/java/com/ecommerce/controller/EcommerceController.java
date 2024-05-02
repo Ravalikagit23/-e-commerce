@@ -15,13 +15,17 @@ public class EcommerceController {
     EcommerceService ecommerceService;
 
     @GetMapping("items")
-    public ResponseEntity<List<Item>> getAllItems(@RequestParam double price) {
+    public ResponseEntity<List<Item>> getAllItems(@RequestParam(required = false)  Double price) {
         return ecommerceService.getAllItems(price);
     }
     @PostMapping("/add")
     public ResponseEntity<String >addItem(@RequestBody Item items ){
 
         return ecommerceService.addItem(items);
+    }
+    @GetMapping("items/category/{category}")
+    public ResponseEntity<List<Item>>getItemByCategory(@PathVariable String category ){
+        return ecommerceService.getItemByCategory(category);
     }
 }
 
